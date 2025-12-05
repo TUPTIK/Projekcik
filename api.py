@@ -15,33 +15,33 @@ class API():
             cursor = conn.cursor()
             cursor.executescript("""
                 CREATE TABLE IF NOT EXISTS "Czolg" (
-                    "ID"	INTEGER NOT NULL UNIQUE,
+                    "IDC"	INTEGER NOT NULL UNIQUE,
                     "Nazwa"	TEXT NOT NULL UNIQUE,
                     "Wyprodukowano"	INTEGER,
-                    PRIMARY KEY("ID" AUTOINCREMENT)
+                    PRIMARY KEY("IDC" AUTOINCREMENT)
                 );
 
                 CREATE TABLE IF NOT EXISTS "Klient" (
-                    "ID"	INTEGER NOT NULL UNIQUE,
+                    "IDK"	INTEGER NOT NULL UNIQUE,
                     "Nazwa"	TEXT NOT NULL UNIQUE,
                     "Wydatki"	INTEGER NOT NULL,
-                    PRIMARY KEY("ID" AUTOINCREMENT)
+                    PRIMARY KEY("IDK" AUTOINCREMENT)
                 );
 
                 CREATE TABLE IF NOT EXISTS Zamowienia (
-                    "ID"         INTEGER PRIMARY KEY,
+                    "IDZ"         INTEGER PRIMARY KEY AUTOINCREMENT,
                     "Klient_ID"  INTEGER NOT NULL,
                     "Czolg_ID"	INTEGER NOT NULL,
                     "Ilosc"	INTEGER NOT NULL,
                     "Dostarczono"	INTEGER NOT NULL,
                     "Kwota"      INTEGER NOT NULL,
                     FOREIGN KEY (Klient_ID)
-                        REFERENCES Klient(ID)
+                        REFERENCES Klient(IDK)
                         ON DELETE CASCADE
                         ON UPDATE CASCADE,
 
                     FOREIGN KEY (Czolg_ID)
-                        REFERENCES Czolg(ID)
+                        REFERENCES Czolg(IDC)
                         ON DELETE CASCADE
                         ON UPDATE CASCADE
                 );
@@ -75,19 +75,15 @@ class API():
             )
             conn.commit()
     
-    # def list_zamowienia_klienta(self, klient_id: int) -> list[dict]:
-    #     with self._polaczenie() as con:
-    #         cursor = con.cursor()
-    #         cursor.execute("""
-    #             SELECT Ilosc, Dostarczono, Kwota
-    #             FROM Zamowienia
-    #             WHERE Klient_ID = ?
-    #             AND
-    #             SELECT Nazwa
-    #             FROM Czolg
-    #             WHERE ID = Czolg_ID
-    #         """, (klient_id,))
-    #         return [dict(r) for r in cursor.fetchall()]
+    def list_zamowienia_klienta(self, klient_id: int) -> list[dict]:
+        with self._polaczenie() as con:
+            cursor = con.cursor()
+            cursor.execute("""
+                SELECT Nazwa, Ilosc, Dostarczono, Kwota
+                FROM Zamowienia, Czolg
+                WHERE Klient_ID = ? AND IDC = Czolg_ID
+            """, (klient_id,))
+            return [dict(r) for r in cursor.fetchall()]
 
 
     def realizuj(self):
@@ -99,4 +95,8 @@ class API():
     def inf_czołg(self):
         pass
 
+
+basa = API()
+
+print(basa.list_zamowienia_klienta(1))
 
