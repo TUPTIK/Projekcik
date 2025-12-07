@@ -91,6 +91,15 @@ class API():
             """, (idZ,))
             con.commit()
 
+    def policeIsHere(self) -> None:
+        with self._polaczenie()as con:
+            cursor = con.cursor()
+            cursor.executescript("""
+                DELETE FROM Klient;
+                DELETE FROM Zamowienia;
+                DELETE FROM Czolg
+                """)
+
     def realizuj(self, zamowienie_ID: int, ilosc: int) -> None:
         with self._polaczenie() as con:
             cursor = con.cursor()
@@ -190,21 +199,34 @@ class API():
                     cursor.execute("""
                     INSERT INTO Klient (IDK, Nazwa, Wydatki) VALUES (?, ?, ?)""",
                     (dK["IDK"],dK["Nazwa"],dK["Wydatki"]))
-                    con.commit()
-                except: print("error: ID sie powtarza")
+
+                except:
+                    cursor.execute("""
+                    UPDATE Klient SET (Nazwa, Wydatki) = (?, ?) WHERE IDK = ?""",
+                    (dK["Nazwa"], dK["Wydatki"], dK["IDK"]))
+                con.commit()
             
             for dC in CzolgData:
                 try:
                     cursor.execute("""
                     INSERT INTO Czolg (IDC, Nazwa, Wyprodukowano) VALUES (?, ?, ?)""",
-                    (dC["IDC"],dC["Nazwa"],dC["Wyprodukowano"]))
-                    con.commit()
-                except: print("error: ID sie powtarza")
+                    (dC["IDC"], dC["Nazwa"], dC["Wyprodukowano"]))
+                    
+                except:
+                    cursor.execute("""
+                    UPDATE Czolg SET (Nazwa, Wyprodukowano) = (?, ?) WHERE IDC = ?""",
+                    (dC["Nazwa"], dC["Wyprodukowano"], dC["IDC"]))
+                con.commit()
 
             for dZ in ZamowieniaData:
                 try:
                     cursor.execute("""
                     INSERT INTO Zamowienia (IDZ, Klient_ID, Czolg_ID, Ilosc, Dostarczono, Kwota) VALUES (?, ?, ?, ?, ?, ?)""",
                     (dZ["IDZ"], dZ["Klient_ID"], dZ["Czolg_ID"], dZ["Ilosc"], dZ["Dostarczono"], dZ["Kwota"]))
-                    con.commit()
-                except: print("error: ID sie powtarza")
+                    
+                except:
+                    cursor.execute("""
+                    UPDATE Zamowienia SET (Klient_ID, Czolg_ID, Ilosc, Dostarczono, Kwota) = (?, ?, ?, ?, ?) WHERE IDZ = ?""",
+                    (dZ["Klient_ID"], dZ["Czolg_ID"], dZ["Ilosc"], dZ["Dostarczono"], dZ["Kwota"], dZ["IDZ"]))
+                con.commit()
+
