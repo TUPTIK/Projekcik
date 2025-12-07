@@ -1,0 +1,152 @@
+{
+    "Klient": [
+        {
+            "IDK": 1,
+            "Nazwa": "CIA",
+            "Wydatki": 80591
+        },
+        {
+            "IDK": 2,
+            "Nazwa": "army",
+            "Wydatki": 5286693
+        },
+        {
+            "IDK": 3,
+            "Nazwa": "terrorists",
+            "Wydatki": 61139
+        },
+        {
+            "IDK": 4,
+            "Nazwa": "big Z",
+            "Wydatki": 100000999999
+        }
+    ],
+    "Zamowienia": [
+        {
+            "IDZ": 1,
+            "Klient_ID": 4,
+            "Czolg_ID": 3,
+            "Ilosc": 100,
+            "Dostarczono": 0,
+            "Kwota": 1000000
+        },
+        {
+            "IDZ": 2,
+            "Klient_ID": 3,
+            "Czolg_ID": 2,
+            "Ilosc": 50,
+            "Dostarczono": 0,
+            "Kwota": 1
+        },
+        {
+            "IDZ": 3,
+            "Klient_ID": 2,
+            "Czolg_ID": 2,
+            "Ilosc": 500,
+            "Dostarczono": 0,
+            "Kwota": 5100500
+        },
+        {
+            "IDZ": 4,
+            "Klient_ID": 4,
+            "Czolg_ID": 3,
+            "Ilosc": 100,
+            "Dostarczono": 0,
+            "Kwota": 99999999999
+        },
+        {
+            "IDZ": 5,
+            "Klient_ID": 3,
+            "Czolg_ID": 1,
+            "Ilosc": 100,
+            "Dostarczono": 0,
+            "Kwota": 5558
+        },
+        {
+            "IDZ": 6,
+            "Klient_ID": 1,
+            "Czolg_ID": 2,
+            "Ilosc": 200,
+            "Dostarczono": 0,
+            "Kwota": 16674
+        },
+        {
+            "IDZ": 7,
+            "Klient_ID": 1,
+            "Czolg_ID": 3,
+            "Ilosc": 200,
+            "Dostarczono": 0,
+            "Kwota": 63917
+        },
+        {
+            "IDZ": 8,
+            "Klient_ID": 2,
+            "Czolg_ID": 3,
+            "Ilosc": 150,
+            "Dostarczono": 0,
+            "Kwota": 58359
+        },
+        {
+            "IDZ": 9,
+            "Klient_ID": 2,
+            "Czolg_ID": 4,
+            "Ilosc": 100,
+            "Dostarczono": 0,
+            "Kwota": 30569
+        },
+        {
+            "IDZ": 10,
+            "Klient_ID": 3,
+            "Czolg_ID": 1,
+            "Ilosc": 100,
+            "Dostarczono": 0,
+            "Kwota": 47243
+        },
+        {
+            "IDZ": 11,
+            "Klient_ID": 2,
+            "Czolg_ID": 4,
+            "Ilosc": 100,
+            "Dostarczono": 0,
+            "Kwota": 69475
+        },
+        {
+            "IDZ": 12,
+            "Klient_ID": 3,
+            "Czolg_ID": 2,
+            "Ilosc": 100,
+            "Dostarczono": 0,
+            "Kwota": 8337
+        },
+        {
+            "IDZ": 13,
+            "Klient_ID": 2,
+            "Czolg_ID": 2,
+            "Ilosc": 100,
+            "Dostarczono": 0,
+            "Kwota": 27790
+        }
+    ],
+    "Czolg": [
+        {
+            "IDC": 1,
+            "Nazwa": "TANK",
+            "Wyprodukowano": 0
+        },
+        {
+            "IDC": 2,
+            "Nazwa": "Abrams",
+            "Wyprodukowano": 0
+        },
+        {
+            "IDC": 3,
+            "Nazwa": "T-35",
+            "Wyprodukowano": 0
+        },
+        {
+            "IDC": 4,
+            "Nazwa": "Armored Car With Big Gun",
+            "Wyprodukowano": 0
+        }
+    ]
+}
